@@ -1,0 +1,23 @@
+{
+  "name": "ui-test-automation-playwright-ts",
+  "version": "1.0.0",
+  "description": "test",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aleksdobrev/ui-test-automation-playwright-ts.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/aleksdobrev/ui-test-automation-playwright-ts/issues"
+  },
+  "homepage": "https://github.com/aleksdobrev/ui-test-automation-playwright-ts#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.59.1",
+    "@types/node": "^25.5.2"
+  }
+}
