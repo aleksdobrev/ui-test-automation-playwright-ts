@@ -1,15 +1,20 @@
 {
   "name": "ui-test-automation-playwright-ts",
   "version": "1.0.0",
-  "description": "test",
+  "description": "ui test automation with playwright and typescript",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "test": "npx playwright test --workers=1",
+    "test:chrome": "npx playwright test --project=chromium --workers=1",
+    "test:firefox": "npx playwright test --project=firefox --workers=1",
+    "test:safari": "npx playwright test --project=webkit --workers=1",
+    "report": "npx playwright show-report"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/aleksdobrev/ui-test-automation-playwright-ts.git"
   },
-  "keywords": [],
-  "author": "",
+  "author": "aleksdobrev",
   "license": "ISC",
   "type": "commonjs",
   "bugs": {
