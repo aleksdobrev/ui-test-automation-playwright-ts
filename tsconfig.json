@@ -1,4 +1,7 @@
 {
+  "ts-node": {
+    "require": ["tsconfig-paths/register"]
+  },
   "compilerOptions": {
     "target": "ES2024",
     "module": "commonjs",
@@ -11,7 +14,13 @@
     "forceConsistentCasingInFileNames": true,
     "allowUnreachableCode": false,
     "outDir": "./dist",
-    "rootDir": "./"
+    "rootDir": "./",
+    "ignoreDeprecations": "6.0", // Remove this silencer when upgrading to TypeScript 7.0 or later. 
+    "baseUrl": ".", // baseURL is required to use "paths", though it will be deprecated in TypeScript 7.0. Remove this when upgrading to TypeScript 7.0 or later.
+    "paths": {
+      "@page-objects/*": ["source/page-objects/*"],
+      "@common-pages/*": ["source/page-objects/common-pages/*"],
+    }
   },
   "include": ["source/**/*", "playwright.config.ts"],
   "exclude": ["node_modules", "playwright-report", "test-results", "dist"]
