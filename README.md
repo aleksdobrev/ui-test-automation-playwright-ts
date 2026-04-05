@@ -60,7 +60,7 @@ This test automation framework is designed to validate UI functionality across m
 ├── env/                    # Environment configuration
 ├── playwright-report/      # Detailed HTML test report. Content is updated after each test run.
 ├── test-results/           # Test execution reports. Content is updated after each test run.
-|
+│
 ├── playwright.config.ts    # Playwright configuration
 ├── tsconfig.json           # TypeScript configuration
 ├── package.json            # Project dependencies
@@ -194,16 +194,16 @@ The framework generates multiple report formats automatically:
 ### JUnit XML Report
 
 - **Location**: `test-results/junit-results.xml`
-- **Use Case**: CI/CD integration, Jenkins, Azure Pipelines
+- **Use Case**: CI/CD integration, Jenkins, Azure Pipelines, TCMS integrations
 
 ### JSON Report
 
 - **Location**: `test-results/json-results.json`
-- **Use Case**: Custom dashboards, result parsing
+- **Use Case**: Custom dashboards, result parsing, TCMS integrations
 
 ## 🔄 GitHub Actions
 
-_GitHub Actions configuration to be added._
+_TODO GitHub Actions configuration to be added._
 
 ## 📚 Additional Resources
 
