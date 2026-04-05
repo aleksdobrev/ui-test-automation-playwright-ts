@@ -25,7 +25,7 @@ This test automation framework is designed to validate UI functionality across m
 
 ## ✅ Prerequisites
 
-- **Node.js**: v16+ (v18+ recommended)
+- **Node.js**: v18+ recommended
 - **npm**: v8 or higher
 - **Git**: For version control
 
@@ -59,6 +59,9 @@ This test automation framework is designed to validate UI functionality across m
 │       ├── constants.ts    # Test constants
 │       └── data/           # Test data files
 ├── env/                    # Environment configuration
+├── playwright-report/      # Detailed HTML test report. Content is updated after each test run.
+├── test-results/           # Test execution reports. Content is updated after each test run.
+|
 ├── playwright.config.ts    # Playwright configuration
 ├── tsconfig.json           # TypeScript configuration
 ├── package.json            # Project dependencies
