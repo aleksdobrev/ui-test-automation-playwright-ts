@@ -1,18 +1,18 @@
 # UI Test Automation - Playwright + TypeScript
 
-A comprehensive end-to-end test automation framework built with [Playwright](https://playwright.dev/) and TypeScript, following the Page Object Model (POM) design pattern for maintainability and scalability.
+A comprehensive end-to-end test automation framework built with [Playwright](https://playwright.dev/) and [TypeScript](https://www.typescriptlang.org/), following the Page Object Model (POM) design pattern for maintainability and scalability.
 
 ## 📋 Table of Contents
 
-- [Overview](#overview)
-- [Prerequisites](#prerequisites)
-- [Installation](#installation)
-- [Project Structure](#project-structure)
-- [Running Tests](#running-tests)
-- [Writing Tests](#writing-tests)
-- [Best Practices](#best-practices)
-- [Test Reporting](#test-reporting)
-- [GitHub Actions](#github-actions)
+- [Overview](#-overview)
+- [Prerequisites](#-prerequisites)
+- [Installation](#-installation)
+- [Project Structure](#-project-structure)
+- [Running Tests](#-running-tests)
+- [Writing Tests](#️-writing-tests)
+- [Best Practices](#-best-practices)
+- [Test Reporting](#-test-reporting)
+- [GitHub Actions](#-github-actions)
 
 ## 🎯 Overview
 
