@@ -9,7 +9,6 @@ A comprehensive end-to-end test automation framework built with [Playwright](htt
 - [Installation](#-installation)
 - [Project Structure](#-project-structure)
 - [Running Tests](#-running-tests)
-- [Writing Tests](#️-writing-tests)
 - [Best Practices](#-best-practices)
 - [Test Reporting](#-test-reporting)
 - [GitHub Actions](#-github-actions)
@@ -123,69 +122,6 @@ npx playwright test --ui
 
 ```zsh
 npm run report
-```
-
-## ✍️ Writing Tests
-
-### Test Template
-
-```typescript
-import { test, expect } from '@playwright/test';
-import { LoginPage } from '@page-objects/LoginPage';
-import { DashboardPage } from '@page-objects/DashboardPage';
-
-test.describe('User Authentication', () => {
-  let loginPage: LoginPage;
-
-  test.beforeEach(async ({ page }) => {
-    loginPage = new LoginPage(page);
-    await loginPage.goto();
-  });
-
-  test('should login successfully with valid credentials', async ({ page }) => {
-    await loginPage.login('user@example.com', 'password123');
-
-    const dashboardPage = new DashboardPage(page);
-    await expect(dashboardPage.welcomeHeading).toBeVisible();
-  });
-
-  test('should display error on invalid credentials', async () => {
-    await loginPage.login('user@example.com', 'wrongpassword');
-
-    await expect(loginPage.errorMessage).toContainText('Invalid credentials');
-  });
-});
-
-test.describe('Dashboard Operations', () => {
-  test.beforeEach(async ({ page }) => {
-    // Login before each test
-    const loginPage = new LoginPage(page);
-    await loginPage.goto();
-    await loginPage.login('user@example.com', 'password123');
-  });
-
-  test('should create a new item', async ({ page }) => {
-    const dashboardPage = new DashboardPage(page);
-    await dashboardPage.goto();
-
-    const initialCount = await dashboardPage.getItemCount();
-
-    await dashboardPage.clickCreateItem();
-    // Fill form and save...
-
-    const finalCount = await dashboardPage.getItemCount();
-    expect(finalCount).toBe(initialCount + 1);
-  });
-
-  test('should display all items in list', async ({ page }) => {
-    const dashboardPage = new DashboardPage(page);
-    await dashboardPage.goto();
-
-    await expect(dashboardPage.itemsList).toBeVisible();
-    const itemCount = await dashboardPage.getItemCount();
-    expect(itemCount).toBeGreaterThan(0);
-  });
-});
 ```
 
 ## 🎓 Best Practices
