@@ -9,13 +9,10 @@ A comprehensive end-to-end test automation framework built with [Playwright](htt
 - [Installation](#installation)
 - [Project Structure](#project-structure)
 - [Running Tests](#running-tests)
-- [Page Object Model Architecture](#page-object-model-architecture)
 - [Writing Tests](#writing-tests)
 - [Best Practices](#best-practices)
 - [Test Reporting](#test-reporting)
 - [GitHub Actions](#github-actions)
-- [Troubleshooting](#troubleshooting)
-- [Contributing](#contributing)
 
 ## 🎯 Overview
 
@@ -125,104 +122,6 @@ npx playwright test --ui
 npm run report
 ```
 
-## 🏗️ Page Object Model Architecture
-
-The Page Object Model encapsulates UI elements and interactions, making tests more maintainable and readable.
-
-### Base Page Class
-
-The base class provides common functionality shared across all pages:
-
-```typescript
-export class BasePage {
-  readonly page: Page;
-  readonly helpers: Helpers;
-
-  // Common elements
-  readonly pageTitle: Locator;
-  readonly loaderIcon: Locator;
-  readonly toasterMessage: Locator;
-  readonly saveButton: Locator;
-  readonly cancelButton: Locator;
-  readonly closeButton: Locator;
-
-  constructor(page: Page) {
-    this.page = page;
-    this.helpers = new Helpers(page);
-  }
-
-  async waitForPageLoad(): Promise<void> {
-    await this.page.waitForLoadState('networkidle');
-  }
-
-  async clickSave(): Promise<void> {
-    await this.saveButton.click();
-    await this.waitForPageLoad();
-  }
-}
-```
-
-### Page-Specific Classes
-
-Create focused page objects that inherit from `BasePage`:
-
-```typescript
-// source/page-objects/LoginPage.ts
-export class LoginPage extends BasePage {
-  readonly emailInput: Locator;
-  readonly passwordInput: Locator;
-  readonly loginButton: Locator;
-
-  readonly baseURL = 'https://app.example.com';
-
-  constructor(page: Page) {
-    super(page);
-    this.emailInput = page.locator('input[type="email"]');
-    this.passwordInput = page.locator('input[type="password"]');
-    this.loginButton = page.locator('button:has-text("Login")');
-  }
-
-  async goto(): Promise<void> {
-    await this.page.goto(this.baseURL);
-  }
-
-  async login(email: string, password: string): Promise<void> {
-    await this.emailInput.fill(email);
-    await this.passwordInput.fill(password);
-    await this.loginButton.click();
-    await this.page.waitForNavigation();
-  }
-}
-```
-
-````typescript
-// source/page-objects/DashboardPage.ts
-export class DashboardPage extends BasePage {
-  readonly welcomeHeading: Locator;
-  readonly createItemButton: Locator;
-  readonly itemsList: Locator;
-
-  constructor(page: Page) {
-    super(page);
-    this.welcomeHeading = page.locator('h1:has-text("Dashboard")');
-    this.createItemButton = page.locator('button[aria-label="Create Item"]');
-    this.itemsList = page.locator('[data-testid="items-list"]');
-  }
-
-  async goto(): Promise<void> {
-    await this.page.goto('/dashboard');
-  }
-
-  async clickCreateItem(): Promise<void> {
-    await this.createItemButton.click();
-  }
-
-  async getItemCount(): Promise<number> {
-    const items = await this.itemsList.locator('li').count();
-    return items;
-  }
-}
-
 ## ✍️ Writing Tests
 
 ### Test Template
@@ -284,7 +183,7 @@ test.describe('Dashboard Operations', () => {
     expect(itemCount).toBeGreaterThan(0);
   });
 });
-````
+```
 
 ## 🎓 Best Practices
 
@@ -316,27 +215,7 @@ await expect(page.locator('button')).toBeVisible();
 await page.locator('button').click();
 ```
 
-### 4. **Test Data Management**
-
-Use Faker.js for generating consistent test data:
-
-```typescript
-import { faker } from '@faker-js/faker';
-
-const userData = {
-  email: faker.internet.email(),
-  username: faker.internet.userName(),
-  password: faker.internet.password(),
-  phone: faker.phone.number(),
-  createdDate: new Date().toISOString(),
-};
-
-// Or use constants for critical data
-import { uiTexts } from '@utils/constants';
-const expectedMessage = uiTexts.successMessages.itemCreated;
-```
-
-### 5. **Use Meaningful Test Names**
+### 4. **Use Meaningful Test Names**
 
 ```typescript
 // ❌ Poor
@@ -346,23 +225,7 @@ test('test 1', async () => { ... });
 test('should successfully login with valid credentials and redirect to dashboard', async () => { ... });
 ```
 
-### 6. **Organize Tests with Describe Blocks**
-
-```typescript
-test.describe('Dashboard Page', () => {
-  test.describe('Navigation', () => {
-    test('should load dashboard on navigation', async () => { ... });
-    test('should display navigation menu', async () => { ... });
-  });
-
-  test.describe('Item Management', () => {
-    test('should create new item', async () => { ... });
-    test('should delete item with confirmation', async () => { ... });
-  });
-});
-```
-
-### 7. **Use test.beforeEach and test.afterEach Hooks**
+### 5. **Use test.beforeEach and test.afterEach Hooks**
 
 Setup and teardown logic in hooks keeps tests clean:
 
@@ -376,25 +239,6 @@ test.beforeEach(async ({ page }) => {
 test.afterEach(async ({ page }) => {
   // Cleanup if needed
   await page.context().clearCookies();
-});
-```
-
-### 8. **Error Handling**
-
-```typescript
-test('should handle navigation errors gracefully', async ({ page }) => {
-  const response = await page.goto('https://invalid-url.com').catch((e) => null);
-  expect(response).toBeNull();
-});
-
-test('should display error message on failed API call', async ({ page }) => {
-  // Mock failed API response
-  await page.route('**/api/**', (route) => route.abort());
-
-  const dashboardPage = new DashboardPage(page);
-  await dashboardPage.goto();
-
-  await expect(dashboardPage.errorMessage).toContainText('Failed to load');
 });
 ```
 
@@ -421,78 +265,6 @@ The framework generates multiple report formats automatically:
 ## 🔄 GitHub Actions
 
 _GitHub Actions configuration to be added._
-
-## 🐛 Troubleshooting
-
-### Tests Timing Out
-
-- Increase `timeout` in `playwright.config.ts`
-- Use `page.waitForLoadState()` instead of fixed waits
-- Check network conditions and server response times
-
-### Flaky Tests
-
-- Avoid hard-coded waits
-- Use `waitForLoadState()` or explicit waits
-- Ensure robust selectors (avoid XPath, prefer data-testid)
-
-### Browser Not Found
-
-```zsh
-npx playwright install --with-deps
-```
-
-### Permission Denied Running Tests on macOS
-
-```zsh
-chmod +x node_modules/.bin/playwright
-```
-
-### Tests Pass Locally but Fail in CI
-
-- Check environment variables (.env configuration)
-- Verify base URL in CI environment
-- Review screenshot/trace artifacts in test reports
-- Check for timing differences in CI vs. local
-
-### Debug a Failed Test
-
-```zsh
-npx playwright test --debug path/to/test.spec.ts
-```
-
-This opens the Playwright Inspector with step-by-step debugging.
-
-## 📝 Contributing
-
-### Before Submitting a PR
-
-1. **Run all tests locally**
-
-   ```zsh
-   npm test
-   ```
-
-2. **Check code quality**
-   - Follow existing POM patterns
-   - Use TypeScript strict mode
-   - Add JSDoc comments to complex methods
-
-3. **Update page objects properly**
-   - Add new locators at the class level
-   - Group related locators together
-   - Update BasePage only for truly common elements
-
-4. **Document changes**
-   - Update this README if adding new patterns
-   - Add comments for non-obvious test logic
-
-### Code Style
-
-- Use TypeScript strict mode
-- Follow PascalCase for class names, camelCase for methods/variables
-- Group related locators and methods together
-- Keep page objects focused and maintainable
 
 ## 📚 Additional Resources
 
