@@ -22,9 +22,13 @@
   },
   "homepage": "https://github.com/aleksdobrev/ui-test-automation-playwright-ts#readme",
   "devDependencies": {
+    "@faker-js/faker": "^10.4.0",
     "@playwright/test": "^1.59.1",
     "@types/node": "^25.5.2",
+    "date-fns": "^4.1.0",
+    "dotenv": "^17.4.0",
     "prettier": "^3.8.1",
-    "typescript": "^6.0.2"
+    "typescript": "^6.0.2",
+    "uuid": "^13.0.0"
   }
 }
