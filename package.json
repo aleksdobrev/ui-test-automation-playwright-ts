@@ -18,6 +18,7 @@
   "homepage": "https://github.com/aleksdobrev/ui-test-automation-playwright-ts#readme",
   "devDependencies": {
     "@playwright/test": "^1.59.1",
-    "@types/node": "^25.5.2"
+    "@types/node": "^25.5.2",
+    "typescript": "^6.0.2"
   }
 }
