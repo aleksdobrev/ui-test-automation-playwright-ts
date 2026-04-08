@@ -22,8 +22,8 @@
     "baseUrl": ".", // baseURL is required to use "paths", though it will be deprecated in TypeScript 7.0. Remove this when upgrading to TypeScript 7.0 or later.
     "paths": {
       "@constants": ["source/utility/constants.ts"],
-      "@page-objects/*": ["source/page-objects/*"],
-      "@common-pages/*": ["source/page-objects/common-pages/*"]
+      "@fixtures": ["source/utility/fixtures.ts"],
+      "@page-objects/*": ["source/page-objects/*"]
     }
   },
   "include": ["source/**/*", "playwright.config.ts"],
