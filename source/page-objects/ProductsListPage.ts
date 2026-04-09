@@ -17,10 +17,10 @@ export class ProductsListPage {
    */
   async verifyProductsListPageIsOpened() {
     await expect(this.pageLogo).toBeVisible();
-    await expect(this.pageLogo).toHaveText(titles.loginPageTitle);
+    await expect(this.pageLogo).toHaveText(titles.swagLabsTitle);
     await expect(this.productsPageTitle).toBeVisible();
     await expect(this.productsPageTitle).toHaveText(titles.productsPageTitle);
     await expect(this.page).toHaveURL('https://www.saucedemo.com/inventory.html');
-    await expect(this.page).toHaveTitle(titles.loginPageTitle);
+    await expect(this.page).toHaveTitle(titles.swagLabsTitle);
   }
 }

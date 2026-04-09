@@ -1,4 +1,4 @@
 export const titles = {
-  loginPageTitle: 'Swag Labs',
+  swagLabsTitle: 'Swag Labs',
   productsPageTitle: 'Products',
 };

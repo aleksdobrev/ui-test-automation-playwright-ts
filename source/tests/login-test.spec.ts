@@ -7,7 +7,7 @@ test(
   { tag: ['@smoke', '@regression', '@login-page'] },
   async ({ loginPage, productsListPage }) => {
     await loginPage.visitPage();
-    await loginPage.verifyLoginFromDefaultState();
+    await loginPage.verifyLoginFormDefaultState();
     await loginPage.signInUser('standard_user', 'secret_sauce'); // TODO add env variables for credentials
     await productsListPage.verifyProductsListPageIsOpened();
   },

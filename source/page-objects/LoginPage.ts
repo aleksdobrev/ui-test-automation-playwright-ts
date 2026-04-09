@@ -35,14 +35,14 @@ export class LoginPage {
    */
   async visitPage() {
     await this.page.goto(this.loginPageUrl);
-    await expect(this.page).toHaveTitle(titles.loginPageTitle);
+    await expect(this.page).toHaveTitle(titles.swagLabsTitle);
     await expect(this.loginForm).toBeVisible();
   }
 
   /**
    * Verify that the login form is in its default state, with all input fields and buttons visible and enabled.
    */
-  async verifyLoginFromDefaultState() {
+  async verifyLoginFormDefaultState() {
     const elements = [this.userNameInputField, this.passwordInputField, this.loginButton];
     for (const element of elements) {
       await expect(element).toBeVisible();
