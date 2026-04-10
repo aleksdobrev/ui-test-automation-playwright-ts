@@ -26,3 +26,10 @@ test('Login with non-existing user', { tag: ['@regression', '@login-page'] }, as
   await loginPage.signInUser('non_existing_user', 'wrong_password');
   await loginPage.verifyNonExistingUserErrorsAreVisible();
 });
+
+test('Login with locked out user', { tag: ['@regression', '@login-page'] }, async ({ loginPage }) => {
+  await loginPage.visitPage();
+  await loginPage.verifyLoginFormDefaultState();
+  await loginPage.signInUser('locked_out_user', 'secret_sauce');
+  await loginPage.verifyLockedOutUserErrorsAreVisible();
+});
