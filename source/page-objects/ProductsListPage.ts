@@ -1,13 +1,13 @@
 import { type Page, type Locator, expect } from '@playwright/test';
+import { BasePage } from '@page-objects/BasePage';
 import { titles } from '@constants';
 
-export class ProductsListPage {
-  readonly page: Page;
+export class ProductsListPage extends BasePage {
   readonly pageLogo: Locator;
   readonly productsPageTitle: Locator;
 
   constructor(page: Page) {
-    this.page = page;
+    super(page);
     this.pageLogo = page.locator('.app_logo');
     this.productsPageTitle = page.locator('[data-test="title"]');
   }

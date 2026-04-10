@@ -1,8 +1,8 @@
 import { type Page, type Locator, expect } from '@playwright/test';
+import { BasePage } from '@page-objects/BasePage';
 import { titles } from '@constants';
 
-export class LoginPage {
-  readonly page: Page;
+export class LoginPage extends BasePage {
   readonly loginPageUrl: string;
   readonly loginForm: Locator;
   readonly userNameInputField: Locator;
@@ -10,7 +10,7 @@ export class LoginPage {
   readonly loginButton: Locator;
 
   constructor(page: Page) {
-    this.page = page;
+    super(page);
     this.loginPageUrl = '/';
     this.loginForm = page.locator('#login_button_container');
     this.userNameInputField = page.locator('[data-test="username"]');
@@ -24,10 +24,9 @@ export class LoginPage {
    * @param password - The password of the user to sign in.
    */
   async signInUser(username: string, password: string) {
-    await this.userNameInputField.fill(username);
-    await this.passwordInputField.fill(password);
-    await this.loginButton.click();
-    // TODO helper methods for click and fill.
+    await this.fillInputField(this.userNameInputField, username);
+    await this.fillInputField(this.passwordInputField, password);
+    await this.clickOnElement(this.loginButton);
   }
 
   /**
