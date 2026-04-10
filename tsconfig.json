@@ -23,6 +23,7 @@
     "paths": {
       "@constants": ["source/utility/constants.ts"],
       "@fixtures": ["source/utility/fixtures.ts"],
+      "@customTypes": ["source/utility/customTypes.ts"],
       "@page-objects/*": ["source/page-objects/*"]
     }
   },
