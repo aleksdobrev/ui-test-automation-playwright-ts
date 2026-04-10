@@ -2,3 +2,8 @@ export const titles = {
   swagLabsTitle: 'Swag Labs',
   productsPageTitle: 'Products',
 };
+
+export const uiTexts = {
+  nonExistingUserErrorMessage: 'Epic sadface: Username and password do not match any user in this service',
+  loginPageEmptyUsernameErrorMessage: 'Epic sadface: Username is required',
+};
