@@ -1,6 +1,6 @@
 import { type Page, type Locator, expect } from '@playwright/test';
 import { BasePage } from '@page-objects/BasePage';
-import { titles } from '@constants';
+import { titles, uiTexts } from '@constants';
 
 export class LoginPage extends BasePage {
   readonly loginPageUrl: string;
@@ -68,6 +68,18 @@ export class LoginPage extends BasePage {
     await expect(this.userNameInputFieldErrorIcon).toBeVisible();
     await expect(this.passwordInputFieldErrorIcon).toBeVisible();
     await expect(this.errorMessage).toBeVisible();
-    await expect(this.errorMessage).toHaveText('Epic sadface: Username is required');
+    await expect(this.errorMessage).toHaveText(uiTexts.loginPageEmptyUsernameErrorMessage);
+  }
+
+  /**
+   * Verify that the appropriate error messages and indicators are visible when attempting to sign in with non-existing user credentials.
+   */
+  async verifyNonExistingUserErrorsAreVisible() {
+    await expect(this.userNameInputField).toHaveClass('input_error form_input error');
+    await expect(this.passwordInputField).toHaveClass('input_error form_input error');
+    await expect(this.userNameInputFieldErrorIcon).toBeVisible();
+    await expect(this.passwordInputFieldErrorIcon).toBeVisible();
+    await expect(this.errorMessage).toBeVisible();
+    await expect(this.errorMessage).toHaveText(uiTexts.nonExistingUserErrorMessage);
   }
 }
