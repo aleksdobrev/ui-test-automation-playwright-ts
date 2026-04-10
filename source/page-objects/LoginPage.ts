@@ -8,14 +8,20 @@ export class LoginPage extends BasePage {
   readonly userNameInputField: Locator;
   readonly passwordInputField: Locator;
   readonly loginButton: Locator;
+  readonly userNameInputFieldErrorIcon: Locator;
+  readonly passwordInputFieldErrorIcon: Locator;
+  readonly errorMessage: Locator;
 
   constructor(page: Page) {
     super(page);
     this.loginPageUrl = '/';
     this.loginForm = page.locator('#login_button_container');
-    this.userNameInputField = page.locator('[data-test="username"]');
-    this.passwordInputField = page.locator('[data-test="password"]');
-    this.loginButton = page.locator('[data-test="login-button"]');
+    this.userNameInputField = page.locator('#user-name');
+    this.passwordInputField = page.locator('#password');
+    this.loginButton = page.locator('#login-button');
+    this.userNameInputFieldErrorIcon = page.locator('#user-name + svg.error_icon');
+    this.passwordInputFieldErrorIcon = page.locator('#password + svg.error_icon');
+    this.errorMessage = page.locator('div.error-message-container.error');
   }
 
   /**
@@ -49,5 +55,19 @@ export class LoginPage extends BasePage {
     }
     await expect(this.userNameInputField).toBeEmpty();
     await expect(this.passwordInputField).toBeEmpty();
+  }
+
+  /**
+   * Verify that the appropriate error messages and indicators are visible when attempting to sign in with empty mandatory fields.
+   */
+  async verifyMandatoryFieldsErrorsAreVisible() {
+    await expect(this.userNameInputField).toBeEmpty();
+    await expect(this.passwordInputField).toBeEmpty();
+    await expect(this.userNameInputField).toHaveClass('input_error form_input error');
+    await expect(this.passwordInputField).toHaveClass('input_error form_input error');
+    await expect(this.userNameInputFieldErrorIcon).toBeVisible();
+    await expect(this.passwordInputFieldErrorIcon).toBeVisible();
+    await expect(this.errorMessage).toBeVisible();
+    await expect(this.errorMessage).toHaveText('Epic sadface: Username is required');
   }
 }
