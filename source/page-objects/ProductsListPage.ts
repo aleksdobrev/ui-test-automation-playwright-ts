@@ -28,8 +28,6 @@ export class ProductsListPage extends BasePage {
     await this.clickOnElement(this.burgerMenuComponent.logoutLink);
   }
 
-  // TODO // abstract verification methods
-
   /**
    * Verify that the Products List page is opened by checking the visibility of key elements and the URL.
    */
