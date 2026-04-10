@@ -12,3 +12,10 @@ test(
     await productsListPage.verifyProductsListPageIsOpened();
   },
 );
+
+test('Verify Login form mandatory fields', { tag: ['@regression', '@login-page'] }, async ({ loginPage }) => {
+  await loginPage.visitPage();
+  await loginPage.verifyLoginFormDefaultState();
+  await loginPage.signInUser('', '');
+  await loginPage.verifyMandatoryFieldsErrorsAreVisible();
+});
