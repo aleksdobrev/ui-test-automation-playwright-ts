@@ -2,6 +2,9 @@ import { test } from '@fixtures';
 
 test.use({ storageState: { cookies: [], origins: [] } });
 
+// TODO Add before each
+// abstract verification methods
+
 test(
   'Login with valid credentials',
   { tag: ['@smoke', '@regression', '@login-page'] },
@@ -32,4 +35,13 @@ test('Login with locked out user', { tag: ['@regression', '@login-page'] }, asyn
   await loginPage.verifyLoginFormDefaultState();
   await loginPage.signInUser('locked_out_user', 'secret_sauce');
   await loginPage.verifyLockedOutUserErrorsAreVisible();
+});
+
+test('Logout from application', { tag: ['@smoke', '@regression', '@login-page'] }, async ({ loginPage, productsListPage }) => {
+  await loginPage.visitPage();
+  await loginPage.verifyLoginFormDefaultState();
+  await loginPage.signInUser('standard_user', 'secret_sauce');
+  await productsListPage.verifyProductsListPageIsOpened();
+  await productsListPage.logout();
+  await loginPage.verifyLoginFormDefaultState();
 });
