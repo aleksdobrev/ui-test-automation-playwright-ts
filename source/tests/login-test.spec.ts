@@ -11,7 +11,7 @@ test(
   'Login with valid credentials',
   { tag: ['@smoke', '@regression', '@login-page'] },
   async ({ loginPage, productsListPage }) => {
-    await loginPage.signInUser('standard_user', 'secret_sauce'); // TODO add env variables for credentials
+    await loginPage.signInUser('standard_user', 'secret_sauce');
     await productsListPage.verifyProductsListPageIsOpened();
   },
 );
