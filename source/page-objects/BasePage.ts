@@ -1,4 +1,4 @@
-import { type Locator, type Page } from '@playwright/test';
+import { type Locator, type Page, expect } from '@playwright/test';
 
 export class BasePage {
   readonly page: Page;
@@ -26,5 +26,14 @@ export class BasePage {
     await locator.waitFor({ state: 'visible' });
     await locator.scrollIntoViewIfNeeded();
     await locator.fill(value);
+  }
+
+  /**
+   * Verify that an element is visible and enabled on the page.
+   * @param locator - The locator of the element to verify.
+   */
+  async verifyElementIsVisibleAndEnabled(locator: Locator) {
+    await expect(locator).toBeVisible();
+    await expect(locator).toBeEnabled();
   }
 }

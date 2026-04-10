@@ -62,8 +62,7 @@ export class LoginPage extends BasePage {
   async verifyLoginFormDefaultState() {
     const elements = [this.userNameInputField, this.passwordInputField, this.loginButton];
     for (const element of elements) {
-      await expect(element).toBeVisible();
-      await expect(element).toBeEnabled();
+      await this.verifyElementIsVisibleAndEnabled(element);
     }
     await expect(this.userNameInputField).toBeEmpty();
     await expect(this.passwordInputField).toBeEmpty();

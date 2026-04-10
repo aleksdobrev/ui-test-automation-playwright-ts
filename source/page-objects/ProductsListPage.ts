@@ -21,14 +21,14 @@ export class ProductsListPage extends BasePage {
    * Log out from the application by opening the burger menu and clicking on the logout link.
    */
   async logout() {
-    await expect(this.burgerMenuButton).toBeVisible();
-    await expect(this.burgerMenuButton).toBeEnabled(); // abstract in helper enable
+    await this.verifyElementIsVisibleAndEnabled(this.burgerMenuButton);
     await this.clickOnElement(this.burgerMenuButton);
     await expect(this.burgerMenuComponent.burgerMenu).toBeVisible();
-    await expect(this.burgerMenuComponent.logoutLink).toBeEnabled();
-    await expect(this.burgerMenuComponent.logoutLink).toBeEnabled();
+    await this.verifyElementIsVisibleAndEnabled(this.burgerMenuComponent.logoutLink);
     await this.clickOnElement(this.burgerMenuComponent.logoutLink);
   }
+
+  // TODO // abstract verification methods
 
   /**
    * Verify that the Products List page is opened by checking the visibility of key elements and the URL.
