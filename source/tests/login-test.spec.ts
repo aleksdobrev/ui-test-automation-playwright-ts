@@ -19,3 +19,10 @@ test('Verify Login form mandatory fields', { tag: ['@regression', '@login-page']
   await loginPage.signInUser('', '');
   await loginPage.verifyMandatoryFieldsErrorsAreVisible();
 });
+
+test('Login with non-existing user', { tag: ['@regression', '@login-page'] }, async ({ loginPage }) => {
+  await loginPage.visitPage();
+  await loginPage.verifyLoginFormDefaultState();
+  await loginPage.signInUser('non_existing_user', 'wrong_password');
+  await loginPage.verifyNonExistingUserErrorsAreVisible();
+});
