@@ -8,6 +8,9 @@
     "test:chrome": "npx playwright test --project=chromium --workers=1",
     "test:firefox": "npx playwright test --project=firefox --workers=1",
     "test:safari": "npx playwright test --project=webkit --workers=1",
+    "test:smoke": "npx playwright test --grep @smoke --workers=1",
+    "test:regression": "npx playwright test --grep @regression --workers=1",
+    "test:login-page": "npx playwright test --grep @login-page --workers=1",
     "report": "npx playwright show-report"
   },
   "repository": {
