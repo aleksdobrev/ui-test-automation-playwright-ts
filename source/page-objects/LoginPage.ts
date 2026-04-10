@@ -45,6 +45,18 @@ export class LoginPage extends BasePage {
   }
 
   /**
+   * Verify that the appropriate error messages and indicators are visible when attempting to sign in with locked out user credentials.
+   */
+  async verifyLockedOutUserErrorsAreVisible() {
+    await expect(this.userNameInputField).toHaveClass('input_error form_input error');
+    await expect(this.passwordInputField).toHaveClass('input_error form_input error');
+    await expect(this.userNameInputFieldErrorIcon).toBeVisible();
+    await expect(this.passwordInputFieldErrorIcon).toBeVisible();
+    await expect(this.errorMessage).toBeVisible();
+    await expect(this.errorMessage).toHaveText(uiTexts.lockedOutUserErrorMessage);
+  }
+
+  /**
    * Verify that the login form is in its default state, with all input fields and buttons visible and enabled.
    */
   async verifyLoginFormDefaultState() {
