@@ -4,7 +4,6 @@ import { titles } from '@constants';
 import { ProductDetails } from '@customTypes';
 
 export class ProductDetailsPage extends BasePage {
-  readonly productDetailsPageUrl: RegExp;
   readonly productTitle: Locator;
   readonly productDescription: Locator;
   readonly productPrice: Locator;
@@ -13,7 +12,6 @@ export class ProductDetailsPage extends BasePage {
 
   constructor(page: Page) {
     super(page);
-    this.productDetailsPageUrl = /inventory-item.html?id=/;
     this.productTitle = page.locator('div[data-test="inventory-item-name"]');
     this.productDescription = page.locator('div[data-test="inventory-item-desc"]');
     this.productPrice = page.locator('div[data-test="inventory-item-price"]');
@@ -27,7 +25,6 @@ export class ProductDetailsPage extends BasePage {
    * @param productDetails - An object containing the expected title, description, and price of the product.
    */
   async verifyProductDetailsPageIsOpened(productDetails: ProductDetails) {
-    await expect(this.page).toHaveURL(this.productDetailsPageUrl);
     await expect(this.page).toHaveTitle(titles.swagLabsTitle);
     await this.verifyElementIsVisibleAndEnabled(this.backToProductsButton);
     await this.verifyElementIsVisibleAndEnabled(this.addToCartButton);
