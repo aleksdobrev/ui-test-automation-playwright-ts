@@ -2,6 +2,7 @@ import { type Page, type Locator, expect } from '@playwright/test';
 import { BasePage } from '@page-objects/BasePage';
 import { BurgerMenuComponent } from '@page-objects/BurgerMenuComponent';
 import { titles } from '@constants';
+import { ProductDetails } from '@customTypes';
 
 export class ProductsListPage extends BasePage {
   readonly burgerMenuComponent: BurgerMenuComponent;
@@ -10,6 +11,9 @@ export class ProductsListPage extends BasePage {
   readonly productsPageTitle: Locator;
   readonly burgerMenuButton: Locator;
   readonly productsList: Locator;
+  readonly productTitle: Locator;
+  readonly productDescription: Locator;
+  readonly productPrice: Locator;
 
   constructor(page: Page) {
     super(page);
@@ -19,6 +23,9 @@ export class ProductsListPage extends BasePage {
     this.productsPageTitle = page.locator('[data-test="title"]');
     this.burgerMenuButton = page.getByRole('button', { name: 'Open Menu' });
     this.productsList = page.locator('div[data-test="inventory-container"]');
+    this.productTitle = page.locator('div[data-test="inventory-item-name"]');
+    this.productDescription = page.locator('div[data-test="inventory-item-desc"]');
+    this.productPrice = page.locator('div[data-test="inventory-item-price"]');
   }
 
   /**
@@ -30,6 +37,30 @@ export class ProductsListPage extends BasePage {
     await expect(this.burgerMenuComponent.burgerMenu).toBeVisible();
     await this.verifyElementIsVisibleAndEnabled(this.burgerMenuComponent.logoutLink);
     await this.clickOnElement(this.burgerMenuComponent.logoutLink);
+  }
+
+  /**
+   * Open the details page of a random product from the products list and return the product details.
+   * @returns An object containing the title, description, and price of the opened product.
+   */
+  async openRandomProductDetailsPage(): Promise<ProductDetails> {
+    const [titles, descriptions, prices] = await Promise.all([
+      this.productTitle.all(),
+      this.productDescription.all(),
+      this.productPrice.all(),
+    ]);
+    const index = Math.floor(Math.random() * titles.length);
+    const [title, description, price] = await Promise.all([
+      titles[index].innerText(),
+      descriptions[index].innerText(),
+      prices[index].innerText(),
+    ]);
+    await this.clickOnElement(titles[index]);
+    return {
+      productTitle: title,
+      productDescription: description,
+      productPrice: price,
+    };
   }
 
   /**
