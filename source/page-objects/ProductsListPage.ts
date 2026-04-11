@@ -5,16 +5,20 @@ import { titles } from '@constants';
 
 export class ProductsListPage extends BasePage {
   readonly burgerMenuComponent: BurgerMenuComponent;
+  readonly productsListPageUrl: string;
   readonly pageLogo: Locator;
   readonly productsPageTitle: Locator;
   readonly burgerMenuButton: Locator;
+  readonly productsList: Locator;
 
   constructor(page: Page) {
     super(page);
     this.burgerMenuComponent = new BurgerMenuComponent(page);
+    this.productsListPageUrl = '/inventory.html';
     this.pageLogo = page.locator('.app_logo');
     this.productsPageTitle = page.locator('[data-test="title"]');
     this.burgerMenuButton = page.getByRole('button', { name: 'Open Menu' });
+    this.productsList = page.locator('div[data-test="inventory-container"]');
   }
 
   /**
@@ -29,6 +33,14 @@ export class ProductsListPage extends BasePage {
   }
 
   /**
+   * Navigate to the Products List page and verify that the page has loaded successfully.
+   */
+  async visitPage() {
+    await this.page.goto(this.productsListPageUrl);
+    await this.verifyProductsListPageIsOpened();
+  }
+
+  /**
    * Verify that the Products List page is opened by checking the visibility of key elements and the URL.
    */
   async verifyProductsListPageIsOpened() {
@@ -38,5 +50,6 @@ export class ProductsListPage extends BasePage {
     await expect(this.productsPageTitle).toHaveText(titles.productsPageTitle);
     await expect(this.page).toHaveURL('https://www.saucedemo.com/inventory.html');
     await expect(this.page).toHaveTitle(titles.swagLabsTitle);
+    await expect(this.productsList).toBeVisible();
   }
 }
