@@ -1,9 +1,10 @@
 import { type Page, type Locator, expect } from '@playwright/test';
 import { BasePage } from '@page-objects/BasePage';
 import { titles } from '@constants';
+import { ProductDetails } from '@customTypes';
 
 export class ProductDetailsPage extends BasePage {
-  readonly productDetailsPageUrl: string;
+  readonly productDetailsPageUrl: RegExp;
   readonly productTitle: Locator;
   readonly productDescription: Locator;
   readonly productPrice: Locator;
@@ -12,26 +13,32 @@ export class ProductDetailsPage extends BasePage {
 
   constructor(page: Page) {
     super(page);
-    this.productDetailsPageUrl = '/inventory-item.html';
-    this.productTitle = page.locator('.inventory_details_name');
-    this.productDescription = page.locator('.inventory_details_desc');
-    this.productPrice = page.locator('.inventory_details_price');
-    this.addToCartButton = page.locator('button[data-test^="add-to-cart"]');
-    this.backToProductsButton = page.locator('button[data-test="back-to-products"]');
+    this.productDetailsPageUrl = /inventory-item.html?id=/;
+    this.productTitle = page.locator('div[data-test="inventory-item-name"]');
+    this.productDescription = page.locator('div[data-test="inventory-item-desc"]');
+    this.productPrice = page.locator('div[data-test="inventory-item-price"]');
+    this.addToCartButton = page.getByRole('button', { name: 'Add to cart' });
+    this.backToProductsButton = page.getByRole('button', { name: 'Go back Back to products' });
   }
 
   /**
-   * Verify that the product details page has opened successfully by checking the URL, page title, and visibility of key elements on the page.
+   * Verify that the product details page is opened.
+   * Verify the correctness of the details of the opened product.
+   * @param productDetails - An object containing the expected title, description, and price of the product.
    */
-  async verifyProductDetailsPageIsOpened() {
-    // URL, page title, Back to products, verify title, description, price, Add to cart, photo
-
+  async verifyProductDetailsPageIsOpened(productDetails: ProductDetails) {
     await expect(this.page).toHaveURL(this.productDetailsPageUrl);
     await expect(this.page).toHaveTitle(titles.swagLabsTitle);
-    await expect(this.productTitle).toBeVisible();
-    await expect(this.productDescription).toBeVisible();
-    await expect(this.productPrice).toBeVisible();
-    await expect(this.addToCartButton).toBeVisible();
-    await expect(this.backToProductsButton).toBeVisible();
+    await this.verifyElementIsVisibleAndEnabled(this.backToProductsButton);
+    await this.verifyElementIsVisibleAndEnabled(this.addToCartButton);
+    const details = [
+      { locator: this.productTitle, expectedText: productDetails.productTitle },
+      { locator: this.productDescription, expectedText: productDetails.productDescription },
+      { locator: this.productPrice, expectedText: productDetails.productPrice },
+    ];
+    for (const { locator, expectedText } of details) {
+      await expect(locator).toBeVisible();
+      await expect(locator).toHaveText(expectedText);
+    }
   }
 }
