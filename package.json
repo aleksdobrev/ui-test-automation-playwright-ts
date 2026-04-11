@@ -11,6 +11,8 @@
     "test:smoke": "npx playwright test --grep @smoke --workers=1",
     "test:regression": "npx playwright test --grep @regression --workers=1",
     "test:login-page": "npx playwright test --grep @login-page --workers=1",
+    "test:products-list": "npx playwright test --grep @products-list --workers=1",
+    "test:product-details": "npx playwright test --grep @product-details --workers=1",
     "report": "npx playwright show-report"
   },
   "repository": {
