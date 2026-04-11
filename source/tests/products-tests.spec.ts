@@ -6,7 +6,6 @@ test(
   async ({ productsListPage, productDetailsPage }) => {
     await productsListPage.visitPage();
     const productDetails = await productsListPage.openRandomProductDetailsPage();
-    console.log(productDetails);
     await productDetailsPage.verifyProductDetailsPageIsOpened(productDetails);
   },
 );
