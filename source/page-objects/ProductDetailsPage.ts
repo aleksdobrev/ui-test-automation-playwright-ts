@@ -2,7 +2,7 @@ import { type Page, type Locator, expect } from '@playwright/test';
 import { BasePage } from '@page-objects/BasePage';
 import { titles } from '@constants';
 
-export class ProductsDetailsPage extends BasePage {
+export class ProductDetailsPage extends BasePage {
   readonly productDetailsPageUrl: string;
   readonly productTitle: Locator;
   readonly productDescription: Locator;
@@ -24,6 +24,8 @@ export class ProductsDetailsPage extends BasePage {
    * Verify that the product details page has opened successfully by checking the URL, page title, and visibility of key elements on the page.
    */
   async verifyProductDetailsPageIsOpened() {
+    // URL, page title, Back to products, verify title, description, price, Add to cart, photo
+
     await expect(this.page).toHaveURL(this.productDetailsPageUrl);
     await expect(this.page).toHaveTitle(titles.swagLabsTitle);
     await expect(this.productTitle).toBeVisible();
