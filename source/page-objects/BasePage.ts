@@ -1,5 +1,5 @@
 import { type Locator, type Page, expect } from '@playwright/test';
-import { ProductDetails } from '@customTypes';
+import { ProductInfo } from '@customTypes';
 
 export class BasePage {
   readonly page: Page;
@@ -31,7 +31,7 @@ export class BasePage {
    * @returns An object containing the title, description, price, and index of the random product.
    * The index can be used to interact with the same product in other methods (e.g., add to cart, open detail).
    */
-  async getRandomProductInfo(): Promise<ProductDetails> {
+  async getRandomProductInfo(): Promise<ProductInfo> {
     const [titles, descriptions, prices] = await Promise.all([
       this.productTitle.all(),
       this.productDescription.all(),

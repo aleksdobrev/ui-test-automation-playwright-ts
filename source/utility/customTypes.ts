@@ -5,3 +5,6 @@ export interface ProductDetails {
   productDescription: string;
   productPrice: string;
 }
+export interface ProductInfo extends ProductDetails {
+  productIndex: number;
+}
