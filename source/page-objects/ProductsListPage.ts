@@ -11,9 +11,7 @@ export class ProductsListPage extends BasePage {
   readonly productsPageTitle: Locator;
   readonly burgerMenuButton: Locator;
   readonly productsList: Locator;
-  readonly productTitle: Locator;
-  readonly productDescription: Locator;
-  readonly productPrice: Locator;
+  readonly removeButton: Locator;
 
   constructor(page: Page) {
     super(page);
@@ -23,9 +21,7 @@ export class ProductsListPage extends BasePage {
     this.productsPageTitle = page.locator('[data-test="title"]');
     this.burgerMenuButton = page.getByRole('button', { name: 'Open Menu' });
     this.productsList = page.locator('div[data-test="inventory-container"]');
-    this.productTitle = page.locator('div[data-test="inventory-item-name"]');
-    this.productDescription = page.locator('div[data-test="inventory-item-desc"]');
-    this.productPrice = page.locator('div[data-test="inventory-item-price"]');
+    this.removeButton = page.getByRole('button', { name: 'Remove' });
   }
 
   /**
@@ -35,6 +31,7 @@ export class ProductsListPage extends BasePage {
   async addRandomProductToCart(): Promise<ProductDetails> {
     const productInfo = await this.getRandomProductInfo();
     await this.clickOnElement(this.addToCartButton.nth(productInfo.productIndex));
+    await this.verifyElementIsVisibleAndEnabled(this.removeButton);
     return {
       productTitle: productInfo.productTitle,
       productDescription: productInfo.productDescription,
