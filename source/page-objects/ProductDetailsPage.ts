@@ -4,18 +4,10 @@ import { titles } from '@constants';
 import { ProductDetails } from '@customTypes';
 
 export class ProductDetailsPage extends BasePage {
-  readonly productTitle: Locator;
-  readonly productDescription: Locator;
-  readonly productPrice: Locator;
-  readonly addToCartButton: Locator;
   readonly backToProductsButton: Locator;
 
   constructor(page: Page) {
     super(page);
-    this.productTitle = page.locator('div[data-test="inventory-item-name"]');
-    this.productDescription = page.locator('div[data-test="inventory-item-desc"]');
-    this.productPrice = page.locator('div[data-test="inventory-item-price"]');
-    this.addToCartButton = page.getByRole('button', { name: 'Add to cart' });
     this.backToProductsButton = page.getByRole('button', { name: 'Go back Back to products' });
   }
 
