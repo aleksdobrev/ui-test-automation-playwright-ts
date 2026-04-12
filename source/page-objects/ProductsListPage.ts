@@ -29,6 +29,20 @@ export class ProductsListPage extends BasePage {
   }
 
   /**
+   * Add a random product from the products list to the cart and return the details of the added product.
+   * @returns An object containing the title, description, and price of the added product.
+   */
+  async addRandomProductToCart(): Promise<ProductDetails> {
+    const productInfo = await this.getRandomProductInfo();
+    await this.clickOnElement(this.addToCartButton.nth(productInfo.productIndex));
+    return {
+      productTitle: productInfo.productTitle,
+      productDescription: productInfo.productDescription,
+      productPrice: productInfo.productPrice,
+    };
+  }
+
+  /**
    * Log out from the application by opening the burger menu and clicking on the logout link.
    */
   async logout() {
@@ -44,22 +58,12 @@ export class ProductsListPage extends BasePage {
    * @returns An object containing the title, description, and price of the opened product.
    */
   async openRandomProductDetailsPage(): Promise<ProductDetails> {
-    const [titles, descriptions, prices] = await Promise.all([
-      this.productTitle.all(),
-      this.productDescription.all(),
-      this.productPrice.all(),
-    ]);
-    const index = Math.floor(Math.random() * titles.length);
-    const [title, description, price] = await Promise.all([
-      titles[index].innerText(),
-      descriptions[index].innerText(),
-      prices[index].innerText(),
-    ]);
-    await this.clickOnElement(titles[index]);
+    const productInfo = await this.getRandomProductInfo();
+    await this.clickOnElement(this.productTitle.nth(productInfo.productIndex));
     return {
-      productTitle: title,
-      productDescription: description,
-      productPrice: price,
+      productTitle: productInfo.productTitle,
+      productDescription: productInfo.productDescription,
+      productPrice: productInfo.productPrice,
     };
   }
 
