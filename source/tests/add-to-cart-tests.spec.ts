@@ -1,7 +1,5 @@
 import { test } from '@fixtures';
 
-// TODO check all tests step-by-step
-
 test(
   'Add random product to cart',
   { tag: ['@smoke', '@regression', '@add-to-cart'] },
