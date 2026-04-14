@@ -30,8 +30,7 @@ export class ShoppingCartPage extends BasePage {
     await this.clickOnElement(this.shoppingCartLink);
     await expect(this.page).toHaveURL(this.shoppingCartPageUrl);
     await expect(this.page).toHaveTitle(titles.swagLabsTitle);
-    await expect(this.pageTitle).toBeVisible();
-    await expect(this.pageTitle).toHaveText(titles.shoppingCartPageTitle);
+    await this.verifyElementIsVisibleAndHasText(this.pageTitle, titles.shoppingCartPageTitle);
     await this.verifyElementIsVisibleAndEnabled(this.continueShoppingButton);
     await this.verifyElementIsVisibleAndEnabled(this.checkoutButton);
   }
@@ -42,12 +41,9 @@ export class ShoppingCartPage extends BasePage {
    */
   async verifyProductIsVisibleInCart(productDetails: ProductDetails) {
     await expect(this.productItem).toBeVisible();
-    await expect(this.productTitle).toBeVisible(); // TODO helper visible and text
-    await expect(this.productTitle).toHaveText(productDetails.productTitle);
-    await expect(this.productDescription).toBeVisible();
-    await expect(this.productDescription).toHaveText(productDetails.productDescription);
-    await expect(this.productPrice).toBeVisible();
-    await expect(this.productPrice).toHaveText(productDetails.productPrice);
+    await this.verifyElementIsVisibleAndHasText(this.productTitle, productDetails.productTitle);
+    await this.verifyElementIsVisibleAndHasText(this.productDescription, productDetails.productDescription);
+    await this.verifyElementIsVisibleAndHasText(this.productPrice, productDetails.productPrice);
     await this.verifyElementIsVisibleAndEnabled(this.removeButton);
   }
 }

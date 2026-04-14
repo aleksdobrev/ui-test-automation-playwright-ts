@@ -78,4 +78,14 @@ export class BasePage {
     await expect(locator).toBeVisible();
     await expect(locator).toBeEnabled();
   }
+
+  /**
+   * Verify that an element is visible and has the expected text.
+   * @param locator - The locator of the element to verify.
+   * @param expectedText - The expected text of the element.
+   */
+  async verifyElementIsVisibleAndHasText(locator: Locator, expectedText: string) {
+    await expect(locator).toBeVisible();
+    await expect(locator).toHaveText(expectedText);
+  }
 }

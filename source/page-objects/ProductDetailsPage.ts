@@ -26,8 +26,7 @@ export class ProductDetailsPage extends BasePage {
       { locator: this.productPrice, expectedText: productDetails.productPrice },
     ];
     for (const { locator, expectedText } of details) {
-      await expect(locator).toBeVisible();
-      await expect(locator).toHaveText(expectedText);
+      await this.verifyElementIsVisibleAndHasText(locator, expectedText);
     }
   }
 }

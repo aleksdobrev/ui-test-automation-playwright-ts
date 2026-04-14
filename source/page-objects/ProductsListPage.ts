@@ -28,8 +28,7 @@ export class ProductsListPage extends BasePage {
     const productInfo = await this.getRandomProductInfo();
     await this.clickOnElement(this.addToCartButton.nth(productInfo.productIndex));
     await this.verifyElementIsVisibleAndEnabled(this.removeButton);
-    await expect(this.shoppingCartCounter).toBeVisible();
-    await expect(this.shoppingCartCounter).toHaveText('1');
+    await this.verifyElementIsVisibleAndHasText(this.shoppingCartCounter, '1');
     return {
       productTitle: productInfo.productTitle,
       productDescription: productInfo.productDescription,
@@ -74,10 +73,8 @@ export class ProductsListPage extends BasePage {
    * Verify that the Products List page is opened by checking the visibility of key elements and the URL.
    */
   async verifyProductsListPageIsOpened() {
-    await expect(this.pageLogo).toBeVisible();
-    await expect(this.pageLogo).toHaveText(titles.swagLabsTitle);
-    await expect(this.pageTitle).toBeVisible();
-    await expect(this.pageTitle).toHaveText(titles.productsPageTitle);
+    await this.verifyElementIsVisibleAndHasText(this.pageLogo, titles.swagLabsTitle);
+    await this.verifyElementIsVisibleAndHasText(this.pageTitle, titles.productsPageTitle);
     await expect(this.page).toHaveURL('https://www.saucedemo.com/inventory.html');
     await expect(this.page).toHaveTitle(titles.swagLabsTitle);
     await expect(this.productsList).toBeVisible();

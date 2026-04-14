@@ -66,18 +66,17 @@ export class LoginPage extends BasePage {
     await expect(this.passwordInputField).toHaveClass('input_error form_input error');
     await expect(this.userNameInputFieldErrorIcon).toBeVisible();
     await expect(this.passwordInputFieldErrorIcon).toBeVisible();
-    await expect(this.errorMessage).toBeVisible();
     switch (error) {
       case 'Locked-Out User':
-        await expect(this.errorMessage).toHaveText(uiTexts.lockedOutUserErrorMessage);
+        await this.verifyElementIsVisibleAndHasText(this.errorMessage, uiTexts.lockedOutUserErrorMessage);
         break;
       case 'Mandatory Fields':
         await expect(this.userNameInputField).toBeEmpty();
         await expect(this.passwordInputField).toBeEmpty();
-        await expect(this.errorMessage).toHaveText(uiTexts.loginPageEmptyUsernameErrorMessage);
+        await this.verifyElementIsVisibleAndHasText(this.errorMessage, uiTexts.loginPageEmptyUsernameErrorMessage);
         break;
       case 'Non-Existing User':
-        await expect(this.errorMessage).toHaveText(uiTexts.nonExistingUserErrorMessage);
+        await this.verifyElementIsVisibleAndHasText(this.errorMessage, uiTexts.nonExistingUserErrorMessage);
         break;
     }
   }
