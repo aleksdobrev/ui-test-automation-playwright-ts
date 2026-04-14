@@ -1,6 +1,7 @@
 export const titles = {
   swagLabsTitle: 'Swag Labs',
   productsPageTitle: 'Products',
+  shoppingCartPageTitle: 'Your Cart',
 };
 
 export const uiTexts = {

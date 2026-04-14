@@ -9,6 +9,7 @@ export class BasePage {
   readonly productPrice: Locator;
   readonly addToCartButton: Locator;
   readonly shoppingCartLink: Locator;
+  readonly shoppingCartCounter: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -18,6 +19,7 @@ export class BasePage {
     this.productPrice = page.locator('div[data-test="inventory-item-price"]');
     this.addToCartButton = page.getByRole('button', { name: 'Add to cart' });
     this.shoppingCartLink = page.locator('a[data-test="shopping-cart-link"]');
+    this.shoppingCartCounter = page.locator('span[data-test="shopping-cart-badge"]');
   }
 
   /**
