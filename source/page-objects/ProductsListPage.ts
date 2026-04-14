@@ -10,7 +10,6 @@ export class ProductsListPage extends BasePage {
   readonly pageLogo: Locator;
   readonly burgerMenuButton: Locator;
   readonly productsList: Locator;
-  readonly removeButton: Locator;
 
   constructor(page: Page) {
     super(page);
@@ -19,7 +18,6 @@ export class ProductsListPage extends BasePage {
     this.pageLogo = page.locator('.app_logo');
     this.burgerMenuButton = page.getByRole('button', { name: 'Open Menu' });
     this.productsList = page.locator('div[data-test="inventory-container"]');
-    this.removeButton = page.getByRole('button', { name: 'Remove' });
   }
 
   /**
