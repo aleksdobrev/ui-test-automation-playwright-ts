@@ -6,6 +6,7 @@ export class BasePage {
   readonly loginPageUrl: string;
   readonly productsListPageUrl: string;
   readonly shoppingCartPageUrl: string;
+  readonly addressFormPageUrl: string;
   readonly pageTitle: Locator;
   readonly productItem: Locator;
   readonly productTitle: Locator;
@@ -15,12 +16,15 @@ export class BasePage {
   readonly shoppingCartLink: Locator;
   readonly shoppingCartCounter: Locator;
   readonly removeButton: Locator;
+  readonly cancelButton: Locator;
+  readonly continueButton: Locator;
 
   constructor(page: Page) {
     this.page = page;
     this.loginPageUrl = '/';
     this.productsListPageUrl = '/inventory.html';
     this.shoppingCartPageUrl = '/cart.html';
+    this.addressFormPageUrl = '/checkout-step-one.html';
     this.pageTitle = page.locator('[data-test="title"]');
     this.productItem = page.locator('div[data-test="inventory-item"]');
     this.productTitle = page.locator('div[data-test="inventory-item-name"]');
@@ -30,6 +34,8 @@ export class BasePage {
     this.shoppingCartLink = page.locator('a[data-test="shopping-cart-link"]');
     this.shoppingCartCounter = page.locator('span[data-test="shopping-cart-badge"]');
     this.removeButton = page.getByRole('button', { name: 'Remove' });
+    this.cancelButton = page.getByRole('button', { name: 'Cancel' });
+    this.continueButton = page.getByRole('button', { name: 'Continue' });
   }
 
   /**
