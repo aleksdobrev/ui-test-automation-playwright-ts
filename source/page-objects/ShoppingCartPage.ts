@@ -41,6 +41,16 @@ export class ShoppingCartPage extends BasePage {
   }
 
   /**
+   * Verify that the product with the provided name is not visible in the shopping cart.
+   * @param productName - The name of the product to verify that it is not in the cart.
+   */
+  async verifyProductIsNotInShoppingCart(productName: string) {
+    await this.openShoppingCart();
+    await expect(this.productItem.filter({ hasText: productName })).not.toBeVisible();
+    await expect(this.productTitle.filter({ hasText: productName })).not.toBeVisible();
+  }
+
+  /**
    * Verify that the product with the provided details is visible in the shopping cart.
    * @param productDetails - An object containing the details of the product to verify in the cart.
    */
