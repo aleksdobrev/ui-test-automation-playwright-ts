@@ -7,6 +7,7 @@ export class BasePage {
   readonly productsListPageUrl: string;
   readonly shoppingCartPageUrl: string;
   readonly pageTitle: Locator;
+  readonly productItem: Locator;
   readonly productTitle: Locator;
   readonly productDescription: Locator;
   readonly productPrice: Locator;
@@ -21,6 +22,7 @@ export class BasePage {
     this.productsListPageUrl = '/inventory.html';
     this.shoppingCartPageUrl = '/cart.html';
     this.pageTitle = page.locator('[data-test="title"]');
+    this.productItem = page.locator('div[data-test="inventory-item"]');
     this.productTitle = page.locator('div[data-test="inventory-item-name"]');
     this.productDescription = page.locator('div[data-test="inventory-item-desc"]');
     this.productPrice = page.locator('div[data-test="inventory-item-price"]');

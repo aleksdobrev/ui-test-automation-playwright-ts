@@ -6,7 +6,6 @@ import { ProductDetails } from '@customTypes';
 export class ShoppingCartPage extends BasePage {
   readonly continueShoppingButton: Locator;
   readonly checkoutButton: Locator;
-  readonly productItem: Locator;
   readonly productTitle: Locator;
   readonly productDescription: Locator;
   readonly productPrice: Locator;
@@ -15,7 +14,6 @@ export class ShoppingCartPage extends BasePage {
     super(page);
     this.continueShoppingButton = page.getByRole('button', { name: 'Go back Continue Shopping' });
     this.checkoutButton = page.getByRole('button', { name: 'Checkout' });
-    this.productItem = page.locator('div[data-test="inventory-item"]');
     this.productTitle = page.locator('div[data-test="inventory-item"] a');
     this.productDescription = page.locator('div[data-test="inventory-item-desc"]');
     this.productPrice = page.locator('div[data-test="inventory-item-price"]');
