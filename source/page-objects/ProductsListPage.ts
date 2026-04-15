@@ -6,7 +6,6 @@ import { ProductDetails } from '@customTypes';
 
 export class ProductsListPage extends BasePage {
   readonly burgerMenuComponent: BurgerMenuComponent;
-  readonly productsListPageUrl: string;
   readonly pageLogo: Locator;
   readonly burgerMenuButton: Locator;
   readonly productsList: Locator;
@@ -14,7 +13,6 @@ export class ProductsListPage extends BasePage {
   constructor(page: Page) {
     super(page);
     this.burgerMenuComponent = new BurgerMenuComponent(page);
-    this.productsListPageUrl = '/inventory.html';
     this.pageLogo = page.locator('.app_logo');
     this.burgerMenuButton = page.getByRole('button', { name: 'Open Menu' });
     this.productsList = page.locator('div[data-test="inventory-container"]');

@@ -4,7 +4,6 @@ import { titles, uiTexts } from '@constants';
 import { type LoginFormErrors } from '@customTypes';
 
 export class LoginPage extends BasePage {
-  readonly loginPageUrl: string;
   readonly loginForm: Locator;
   readonly userNameInputField: Locator;
   readonly passwordInputField: Locator;
@@ -15,7 +14,6 @@ export class LoginPage extends BasePage {
 
   constructor(page: Page) {
     super(page);
-    this.loginPageUrl = '/';
     this.loginForm = page.locator('#login_button_container');
     this.userNameInputField = page.locator('#user-name');
     this.passwordInputField = page.locator('#password');

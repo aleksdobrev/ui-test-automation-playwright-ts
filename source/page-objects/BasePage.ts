@@ -3,6 +3,9 @@ import { ProductInfo } from '@customTypes';
 
 export class BasePage {
   readonly page: Page;
+  readonly loginPageUrl: string;
+  readonly productsListPageUrl: string;
+  readonly shoppingCartPageUrl: string;
   readonly pageTitle: Locator;
   readonly productTitle: Locator;
   readonly productDescription: Locator;
@@ -14,6 +17,9 @@ export class BasePage {
 
   constructor(page: Page) {
     this.page = page;
+    this.loginPageUrl = '/';
+    this.productsListPageUrl = '/inventory.html';
+    this.shoppingCartPageUrl = '/cart.html';
     this.pageTitle = page.locator('[data-test="title"]');
     this.productTitle = page.locator('div[data-test="inventory-item-name"]');
     this.productDescription = page.locator('div[data-test="inventory-item-desc"]');
