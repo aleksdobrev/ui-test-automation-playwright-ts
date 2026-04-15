@@ -60,6 +60,18 @@ export class ProductsListPage extends BasePage {
   }
 
   /**
+   * Remove a product from the cart by its name and verify that the product is removed successfully.
+   * @param productName - The name of the product to remove from the cart.
+   */
+  async removeProductFromCartByName(productName: string) {
+    const productItemRemoveButton = this.productItem.filter({ hasText: productName }).getByRole('button', { name: 'Remove' });
+    await this.verifyElementIsVisibleAndEnabled(productItemRemoveButton);
+    await this.clickOnElement(productItemRemoveButton);
+    await expect(this.shoppingCartCounter).not.toBeVisible();
+    await expect(productItemRemoveButton).not.toBeVisible();
+  }
+
+  /**
    * Navigate to the Products List page and verify that the page has loaded successfully.
    */
   async visitPage() {
