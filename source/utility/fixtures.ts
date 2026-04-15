@@ -3,8 +3,10 @@ import { LoginPage } from '@page-objects/LoginPage';
 import { ProductsListPage } from '@page-objects/ProductsListPage';
 import { ProductDetailsPage } from '@page-objects/ProductDetailsPage';
 import { ShoppingCartPage } from '@page-objects/ShoppingCartPage';
+import { AddressFormPage } from '@page-objects/AddressFormPage';
 
 interface Fixtures {
+  addressFormPage: AddressFormPage;
   loginPage: LoginPage;
   productDetailsPage: ProductDetailsPage;
   productsListPage: ProductsListPage;
@@ -12,6 +14,10 @@ interface Fixtures {
 }
 
 export const test = base.extend<Fixtures>({
+  addressFormPage: async ({ page }, use) => {
+    await use(new AddressFormPage(page));
+  },
+
   loginPage: async ({ page }, use) => {
     await use(new LoginPage(page));
   },
