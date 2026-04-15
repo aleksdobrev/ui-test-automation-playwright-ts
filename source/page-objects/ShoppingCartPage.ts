@@ -4,7 +4,6 @@ import { titles } from '@constants';
 import { ProductDetails } from '@customTypes';
 
 export class ShoppingCartPage extends BasePage {
-  readonly shoppingCartPageUrl: string;
   readonly continueShoppingButton: Locator;
   readonly checkoutButton: Locator;
   readonly productItem: Locator;
@@ -14,13 +13,21 @@ export class ShoppingCartPage extends BasePage {
 
   constructor(page: Page) {
     super(page);
-    this.shoppingCartPageUrl = '/cart.html';
     this.continueShoppingButton = page.getByRole('button', { name: 'Go back Continue Shopping' });
     this.checkoutButton = page.getByRole('button', { name: 'Checkout' });
     this.productItem = page.locator('div[data-test="inventory-item"]');
     this.productTitle = page.locator('div[data-test="inventory-item"] a');
     this.productDescription = page.locator('div[data-test="inventory-item-desc"]');
     this.productPrice = page.locator('div[data-test="inventory-item-price"]');
+  }
+
+  /**
+   * Navigate back to the products list page by clicking on the continue shopping button and verify that the navigation is successful.
+   */
+  async navigateBackToProductsList() {
+    await this.clickOnElement(this.continueShoppingButton);
+    await expect(this.page).toHaveURL(this.productsListPageUrl);
+    await this.verifyElementIsVisibleAndHasText(this.pageTitle, titles.productsPageTitle);
   }
 
   /**
