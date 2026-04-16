@@ -8,3 +8,9 @@ export interface ProductDetails {
 export interface ProductInfo extends ProductDetails {
   productIndex: number;
 }
+
+export interface ClientDetails {
+  firstName: string;
+  lastName: string;
+  postCode: string;
+}

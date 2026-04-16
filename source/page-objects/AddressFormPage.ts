@@ -1,6 +1,8 @@
 import { type Locator, type Page, expect } from '@playwright/test';
 import { BasePage } from '@page-objects/BasePage';
 import { titles } from '@constants';
+import { faker } from '@faker-js/faker';
+import { ClientDetails } from '@customTypes';
 
 export class AddressFormPage extends BasePage {
   readonly firstNameInputField: Locator;
@@ -12,6 +14,24 @@ export class AddressFormPage extends BasePage {
     this.firstNameInputField = page.getByPlaceholder('First Name');
     this.lastNameInputField = page.getByPlaceholder('Last Name');
     this.postalCodeInputField = page.getByPlaceholder('Zip/Postal Code');
+  }
+
+  /**
+   * Fills the Address Form with random client details.
+   * @returns - The details of the client
+   */
+  async fiiAddressForm(): Promise<ClientDetails> {
+    const firstName = await faker.person.firstName();
+    await this.firstNameInputField.fill(firstName);
+    const lastName = await faker.person.lastName();
+    await this.lastNameInputField.fill(lastName);
+    const postCode = await faker.location.zipCode();
+    await this.postalCodeInputField.fill(postCode);
+    return {
+      firstName,
+      lastName,
+      postCode,
+    };
   }
 
   /**
