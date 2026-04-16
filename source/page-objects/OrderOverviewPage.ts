@@ -3,8 +3,11 @@ import { BasePage } from '@page-objects/BasePage';
 import { ProductDetails } from '@customTypes';
 
 export class OrderOverviewPage extends BasePage {
+  readonly finishButton: Locator;
+
   constructor(page: Page) {
     super(page);
+    this.finishButton = page.getByRole('button', { name: 'Finish' });
   }
 
   /**
