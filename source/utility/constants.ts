@@ -3,10 +3,13 @@ export const titles = {
   productsPageTitle: 'Products',
   shoppingCartPageTitle: 'Your Cart',
   addressFormPageTitle: 'Checkout: Your Information',
+  checkoutCompletePageTitle: 'Checkout: Complete!',
 };
 
 export const uiTexts = {
   nonExistingUserErrorMessage: 'Epic sadface: Username and password do not match any user in this service',
   loginPageEmptyUsernameErrorMessage: 'Epic sadface: Username is required',
   lockedOutUserErrorMessage: 'Epic sadface: Sorry, this user has been locked out.',
+  thankYouMessageText: 'Thank you for your order!',
+  orderDispatchedMessageText: 'Your order has been dispatched, and will arrive just as fast as the pony can get there!',
 };
