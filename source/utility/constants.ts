@@ -13,3 +13,18 @@ export const uiTexts = {
   thankYouMessageText: 'Thank you for your order!',
   orderDispatchedMessageText: 'Your order has been dispatched, and will arrive just as fast as the pony can get there!',
 };
+
+export const users = {
+  standardUser: {
+    username: 'standard_user',
+    password: 'secret_sauce',
+  },
+  lockedOutUser: {
+    username: 'locked_out_user',
+    password: 'secret_sauce',
+  },
+  nonExistingUser: {
+    username: 'non_existing_user',
+    password: 'wrong_password',
+  },
+};
