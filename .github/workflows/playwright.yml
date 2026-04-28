@@ -2,6 +2,7 @@ name: Playwright Tests
 on:
   push:
     branches: master
+    #  branches: '**' - Option to run on all branches, but it can be noisy.
   pull_request:
     branches: master
 jobs:
