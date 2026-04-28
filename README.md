@@ -203,7 +203,7 @@ The framework generates multiple report formats automatically:
 
 ## 🔄 GitHub Actions
 
-_TODO GitHub Actions configuration to be added._
+Tests run automatically on push to `master` and pull requests to `master` via the **Playwright Tests** workflow. The workflow installs dependencies, runs all tests, and archives the test report as an artifact.
 
 ## 📚 Additional Resources
 
