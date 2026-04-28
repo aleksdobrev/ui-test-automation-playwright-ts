@@ -3,8 +3,14 @@ on:
   push:
     branches: master
     # branches: '**' - Option to run on push to all branches, but it can be noisy.
+    # branches:
+    #   - 'master' - Run on push to master branch.
+    #   - 'feature/**' - Option to run on push to feature branches.
   pull_request:
     branches: master
+  # schedule:
+  # - cron: '30 2 * * *' # Runs every day at 2:30 AM UTC. Adjust the schedule as needed.
+  # * * * * * - Minute, Hour, Day of Month, Month, Day of Week(0 - 6 or SUN-SAT)
 jobs:
   test:
     timeout-minutes: 10
