@@ -1,5 +1,6 @@
 import { test as setup } from '@fixtures';
 import { users } from '@constants';
+
 const authFile = 'auth.json';
 
 setup('Authenticate', async ({ loginPage, page }) => {
