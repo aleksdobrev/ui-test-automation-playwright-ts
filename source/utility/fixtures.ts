@@ -1,4 +1,4 @@
-import { test as base } from '@playwright/test';
+import { test as base, expect } from '@playwright/test';
 import { LoginPage } from '@page-objects/LoginPage';
 import { ProductsListPage } from '@page-objects/ProductsListPage';
 import { ProductDetailsPage } from '@page-objects/ProductDetailsPage';
@@ -17,8 +17,37 @@ interface Fixtures {
   shoppingCartPage: ShoppingCartPage;
 }
 
-export const test = base.extend<Fixtures>({
-  addressFormPage: async ({ page }, use) => {
+interface Account {
+  username: string;
+  password: string;
+}
+
+export const test = base.extend<Fixtures, { signIn: Account }>({
+  signIn: [
+    async ({ browser }, use, workerInfo) => {
+      // Unique username.
+      const username = 'user' + workerInfo.workerIndex;
+      const password = 'verysecure';
+
+      // Create the account with Playwright.
+      const page = await browser.newPage();
+      await page.goto('/signup');
+      await page.getByLabel('User Name').fill(username);
+      await page.getByLabel('Password').fill(password);
+      await page.getByText('Sign up').click();
+      // Make sure everything is ok.
+      await expect(page.getByTestId('result')).toHaveText('Success');
+      // Do not forget to cleanup.
+      await page.close();
+
+      // Use the account value.
+      await use({ username, password });
+    },
+    { scope: 'worker' },
+  ],
+
+  addressFormPage: async ({ page, signIn }, use) => {
+    await signIn;
     await use(new AddressFormPage(page));
   },
 
