@@ -1,4 +1,5 @@
 import { type Page, type Locator, expect } from '@playwright/test';
+import { test } from '@fixtures';
 import { BasePage } from '@page-objects/BasePage';
 import { titles } from '@constants';
 import { ProductDetails } from '@customTypes';
@@ -17,16 +18,22 @@ export class ProductDetailsPage extends BasePage {
    * @param productDetails - An object containing the expected title, description, and price of the product.
    */
   async verifyProductDetailsPageIsOpened(productDetails: ProductDetails) {
-    await expect(this.page).toHaveTitle(titles.swagLabsTitle);
-    await this.verifyElementIsVisibleAndEnabled(this.backToProductsButton);
-    await this.verifyElementIsVisibleAndEnabled(this.addToCartButton);
-    const details = [
-      { locator: this.productTitle, expectedText: productDetails.productTitle },
-      { locator: this.productDescription, expectedText: productDetails.productDescription },
-      { locator: this.productPrice, expectedText: productDetails.productPrice },
-    ];
-    for (const { locator, expectedText } of details) {
-      await this.verifyElementIsVisibleAndHasText(locator, expectedText);
-    }
+    await test.step(
+      'Verify Product Details Page Is Opened',
+      async () => {
+        await expect(this.page).toHaveTitle(titles.swagLabsTitle);
+        await this.verifyElementIsVisibleAndEnabled(this.backToProductsButton);
+        await this.verifyElementIsVisibleAndEnabled(this.addToCartButton);
+        const details = [
+          { locator: this.productTitle, expectedText: productDetails.productTitle },
+          { locator: this.productDescription, expectedText: productDetails.productDescription },
+          { locator: this.productPrice, expectedText: productDetails.productPrice },
+        ];
+        for (const { locator, expectedText } of details) {
+          await this.verifyElementIsVisibleAndHasText(locator, expectedText);
+        }
+      },
+      { box: true },
+    );
   }
 }
