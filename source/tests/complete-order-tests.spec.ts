@@ -1,8 +1,8 @@
 import { test } from '@fixtures';
 
 test(
-  'Complete product order',
-  { tag: ['@smoke', '@regression', '@complete-order'] },
+  'Complete product order @T9ef09735',
+  { tag: ['@T9ef09735', '@smoke', '@regression', '@complete-order'] },
   async ({ productsListPage, shoppingCartPage, addressFormPage, orderOverviewPage, checkoutCompletePage }) => {
     await productsListPage.visitPage();
     const productDetails = await productsListPage.addRandomProductToCart();

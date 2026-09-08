@@ -1,8 +1,8 @@
 import { test } from '@fixtures';
 
 test(
-  'Remove product from cart via Products list page',
-  { tag: ['@smoke', '@regression', '@remove-from-cart'] },
+  'Remove product from cart via Products list page @Tbdf3cf9e',
+  { tag: ['@Tbdf3cf9e', '@smoke', '@regression', '@remove-from-cart'] },
   async ({ productsListPage, shoppingCartPage }) => {
     await productsListPage.visitPage();
     const productDetails = await productsListPage.addRandomProductToCart();
