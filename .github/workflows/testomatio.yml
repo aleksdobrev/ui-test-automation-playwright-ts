@@ -26,8 +26,9 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
       - run: |
-          grep_pattern="@${TESTOMATIO_GREP//|/|@}"
-          [[ "$TESTOMATIO_GREP" == "" ]] && grep_pattern=""
+          grep_pattern=$(printf '%s' "$TESTOMATIO_GREP" | sed 's/|/|@/g')
+          [[ -n "$grep_pattern" ]] && grep_pattern="@$grep_pattern"
+          printf 'Running Playwright grep pattern: %s\n' "$grep_pattern"
           npx playwright test --workers=1 --project=chromium --grep "$grep_pattern"
         env:
           TESTOMATIO_GREP: '${{ github.event.inputs.grep }}'
