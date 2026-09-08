@@ -1,16 +1,16 @@
 name: Testomatio Tests
 
 on:
-    workflow_dispatch:
-        inputs:
-          grep:
-            description: 'tests to grep '
-            required: false
-            default: ''
-          run:
-            required: false
-          testomatio:
-            required: false
+  workflow_dispatch:
+    inputs:
+      grep:
+        description: 'tests to grep '
+        required: false
+        default: ''
+      run:
+        required: false
+      testomatio:
+        required: false
 
 jobs:
   test:
@@ -25,10 +25,14 @@ jobs:
         run: npm ci
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
-      - run: npx playwright test --grep "${{ github.event.inputs.grep }}"
+      - run: |
+          grep_pattern="@${TESTOMATIO_GREP//|/|@}"
+          [[ "$TESTOMATIO_GREP" == "" ]] && grep_pattern=""
+          npx playwright test --workers=1 --project=chromium --grep "$grep_pattern"
         env:
-         TESTOMATIO: "${{ github.event.inputs.testomatio }}"
-         TESTOMATIO_RUN: "${{ github.event.inputs.run }}"
+          TESTOMATIO_GREP: '${{ github.event.inputs.grep }}'
+          TESTOMATIO: '${{ github.event.inputs.testomatio }}'
+          TESTOMATIO_RUN: '${{ github.event.inputs.run }}'
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:
