@@ -36,6 +36,12 @@ export default defineConfig({
     ['list'],
     ['junit', { outputFile: 'test-results/junit-results.xml' }],
     ['json', { outputFile: 'test-results/json-results.json' }],
+    [
+      '@testomatio/reporter/playwright',
+      {
+        apiKey: process.env.TESTOMATIO,
+      },
+    ],
   ],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
